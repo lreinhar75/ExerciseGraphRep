@@ -31,38 +31,6 @@ public class MatrixGraph {
         }
     }
 
-/*    public int[] Dijkstra(int source) {
-        int[] shortestdistance; //= new int[matrixgraph.length];
-        int[] predecessor;// = new int[matrixgraph.length];
-        boolean[] handled;// = new boolean[matrixgraph.length];
- //Code goes here
-
-        return new int[7];
-    }
-    public int findMin(int[] dist, boolean[] done)
-    {
-        int vertex=0;
-        int value=200;
-        for (int i = 0; i < dist.length ; i++) {
-            if (dist[i]<value && !done[i])
-            {
-                vertex=i;
-                value=dist[i];
-            }
-        }
-        return vertex;
-    }
-
-    public void printPath(int[] predecesor, int target)
-    {
-        int current=target;
-        System.out.print("\n");
-        while (current!=-1 && current!=predecesor[current])
-        {
-            System.out.print((current+1) + " from ");
-            current=predecesor[current];
-        }
-    }*/
 }
 
 class AdjacencyGraph {
@@ -107,15 +75,20 @@ class AdjacencyGraph {
 
     }
 
+    public void Dijkstra(Vertex source)
+    {
+
+    }
+
+    public void printPath (Vertex destination)
+    {}
 
 }
 
 class Vertex{
     public String Name;
     public ArrayList<Edge> OutEdges;
-    public int color=0;
-    public Vertex prev=null;
-    public int level = 0;
+  
     public Vertex(String id){
         Name=id;
         OutEdges=new ArrayList<Edge>();
