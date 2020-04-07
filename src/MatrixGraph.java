@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 
 public class MatrixGraph {
     boolean[][] connections;
@@ -84,20 +85,52 @@ class AdjacencyGraph {
         start.color=1; // 1 is Gray
         start.distance=0;
         FIFOList.add(start);
+        System.out.println("root vertex: " +start.Name + " level: "+start.distance);
         while (!FIFOList.isEmpty())
         {
             Vertex current =FIFOList.remove(); // take first item in list "u"
             for (int i=0; i < current.getOutEdges().size();i++)
             {
                 Vertex Neighbor = current.getOutEdges().get(i).getTovertex();
+                if (Neighbor.color==0)
+                {
+                    Neighbor.color=1; //Now the color is Gray
+                    Neighbor.distance=current.distance +1;
+                    Neighbor.prev= current;
+                    FIFOList.add(Neighbor);
+                    System.out.println(" Vertex visited "+ Neighbor.Name
+                            + " level from root: "+ Neighbor.distance);
+                }
 
             }
+            current.color=2; // 2 is black
         }
     }
 
     public void Dijkstra(Vertex source)
     {
+        PriorityQueue<Vertex> TList=new PriorityQueue<>();
+        // Initialize
+        for (int i=0;i<Vertices.size();i++)
+        {
+            Vertices.get(i).prev=null;
+            Vertices.get(i).distance=1000; // 1000 is infinity
+            Vertices.get(i).color=0;
+            TList.offer(Vertices.get(i));
+        }
+        TList.remove(source);
+        source.distance=0;
+        TList.offer(source);
+        while ( !TList.isEmpty())
+        {
+            Vertex currentv= TList.poll(); // revome from min heap (priority queue)
+            ArrayList<Edge> CurOutedges = currentv.getOutEdges();
+            for (int i =0 ; i < CurOutedges.size();i++)
+            {
 
+            }
+            currentv.color=1;
+        }
     }
 
     public void printPath (Vertex destination)
@@ -105,7 +138,7 @@ class AdjacencyGraph {
 
 }
 
-class Vertex{
+class Vertex implements  Comparable<Vertex>{
     public String Name;
     public ArrayList<Edge> OutEdges;
     Integer color=0;
@@ -120,6 +153,16 @@ class Vertex{
     }
     public ArrayList<Edge> getOutEdges(){
         return OutEdges;
+    }
+
+
+    @Override
+    public int compareTo(Vertex vertex) {
+        if (this.distance > vertex.distance)
+            return 1;
+        if (this.distance < vertex.distance)
+            return -1;
+        return 0;
     }
 }
 

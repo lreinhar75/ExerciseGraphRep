@@ -50,6 +50,6 @@ public class GraphTests {
         adjacencyGraph.newedge(e,g,4);
         adjacencyGraph.newedge(f,g,1);
         adjacencyGraph.printGraph();
-
+        adjacencyGraph.BFS(a);
     }
 }
