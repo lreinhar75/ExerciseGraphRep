@@ -51,5 +51,11 @@ public class GraphTests {
         adjacencyGraph.newedge(f,g,1);
         adjacencyGraph.printGraph();
         adjacencyGraph.BFS(a);
+        adjacencyGraph.Dijkstra(a);
+        adjacencyGraph.printPath(g);
+        adjacencyGraph.printPath(f);
+        adjacencyGraph.printPath(c);
+        adjacencyGraph.printPath(b);
+        adjacencyGraph.printPath(d);
     }
 }

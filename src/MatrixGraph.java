@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
+import java.util.Stack;
 
 public class MatrixGraph {
     boolean[][] connections;
@@ -127,14 +128,37 @@ class AdjacencyGraph {
             ArrayList<Edge> CurOutedges = currentv.getOutEdges();
             for (int i =0 ; i < CurOutedges.size();i++)
             {
-
+                Vertex Nextvertex  =  CurOutedges.get(i).getTovertex();   // j
+                if (Nextvertex.color==0 && (currentv.distance + CurOutedges.get(i).weight < Nextvertex.distance ))
+                {
+                    TList.remove(Nextvertex);
+                    Nextvertex.prev=currentv;
+                    Nextvertex.distance= currentv.distance + CurOutedges.get(i).weight;
+                    TList.offer(Nextvertex);
+                }
             }
             currentv.color=1;
         }
     }
 
     public void printPath (Vertex destination)
-    {}
+    {
+        Vertex pvertex = destination;
+        System.out.println("To " + destination.Name + " Shortest length: " + destination.distance);
+        Stack<Vertex>  Path = new Stack<>();
+        int limit =0;
+        while (pvertex!=null)
+        {
+          Path.push(pvertex);
+          pvertex = pvertex.prev;
+        }
+        if (!Path.isEmpty())
+            limit = Path.size();
+        for (int i=0; i<limit -1; i++)
+            System.out.println(Path.pop().Name + " -> ");
+        if (limit >0)
+            System.out.println(Path.pop().Name);
+    }
 
 }
 
