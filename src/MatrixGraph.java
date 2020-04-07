@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class MatrixGraph {
     boolean[][] connections;
@@ -72,7 +73,26 @@ class AdjacencyGraph {
     }
     public void BFS(Vertex start )
     {
+        LinkedList<Vertex> FIFOList = new LinkedList<>();
+        //Initialize
+        for (int i=0; i> Vertices.size();i++)
+        {
+            Vertices.get(i).color=0;  // 0 is white
+            Vertices.get(i).prev = null;
+            Vertices.get(i).distance= Vertices.size()+1;
+        }
+        start.color=1; // 1 is Gray
+        start.distance=0;
+        FIFOList.add(start);
+        while (!FIFOList.isEmpty())
+        {
+            Vertex current =FIFOList.remove(); // take first item in list "u"
+            for (int i=0; i < current.getOutEdges().size();i++)
+            {
+                Vertex Neighbor = current.getOutEdges().get(i).getTovertex();
 
+            }
+        }
     }
 
     public void Dijkstra(Vertex source)
@@ -88,7 +108,9 @@ class AdjacencyGraph {
 class Vertex{
     public String Name;
     public ArrayList<Edge> OutEdges;
-  
+    Integer color=0;
+    Vertex prev=null;
+    Integer distance=0;
     public Vertex(String id){
         Name=id;
         OutEdges=new ArrayList<Edge>();
