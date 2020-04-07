@@ -18,6 +18,7 @@ public class GraphTests {
         matrixGraph.addEdge(5,6, 1);
 
         matrixGraph.printGraph();
+
  //       int[] path=matrixGraph.Dijkstra(0);
  //       matrixGraph.printPath(path,6);
         AdjacencyGraph adjacencyGraph = new AdjacencyGraph();
